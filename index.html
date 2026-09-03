@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Torre de Control Redex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#f4f4f6;
+  --panel:#ffffff;
+  --panel-2:#f6f4f5;
+  --line:#e0dee1;
+  --line-strong:#c9c6ca;
+  --ink:#171717;
+  --ink-dim:#75717a;
+  --ink-soft:#3d3a40;
+  --accent:#e2116f;
+  --accent-2:#7a1140;
+  --accent-wash:rgba(226,17,111,0.07);
+  --shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  --mono:'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans:'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#18171a;
+    --panel:#221f24;
+    --panel-2:#28252b;
+    --line:#3a363d;
+    --line-strong:#4c4750;
+    --ink:#f2f0f2;
+    --ink-dim:#a39da8;
+    --ink-soft:#d3cfd4;
+    --accent:#ff4b95;
+    --accent-2:#ffa4c9;
+    --accent-wash:rgba(255,75,149,0.10);
+    --shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#18171a;
+  --panel:#221f24;
+  --panel-2:#28252b;
+  --line:#3a363d;
+  --line-strong:#4c4750;
+  --ink:#f2f0f2;
+  --ink-dim:#a39da8;
+  --ink-soft:#d3cfd4;
+  --accent:#ff4b95;
+  --accent-2:#ffa4c9;
+  --accent-wash:rgba(255,75,149,0.10);
+  --shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.wrap{
+  max-width:920px;
+  margin:0 auto;
+  padding:56px 24px 40px;
+  width:100%;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:22px;
+  margin-bottom:36px;
+  flex-wrap:wrap;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 4px var(--accent-wash);
+  flex-shrink:0;
+}
+.brand span{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+}
+h1{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  margin:0;
+  text-wrap:balance;
+}
+.lede{
+  color:var(--ink-dim);
+  font-size:14.5px;
+  margin:0 0 8px;
+  max-width:60ch;
+}
+main{flex:1;}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:16px;
+}
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr;}
+  .wrap{padding-top:40px;}
+}
+a.card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:22px 22px 20px;
+  text-decoration:none;
+  color:inherit;
+  box-shadow:var(--shadow);
+  transition:border-color 0.15s ease, transform 0.15s ease;
+  min-height:150px;
+}
+a.card:hover{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
+a.card:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.card-code{
+  font-family:var(--mono);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  color:var(--accent);
+}
+.card-icon{
+  font-size:20px;
+  line-height:1;
+  opacity:0.9;
+}
+.card-body h2{
+  font-size:18px;
+  font-weight:600;
+  margin:0 0 6px;
+  letter-spacing:-0.005em;
+}
+.card-body p{
+  font-size:13.5px;
+  color:var(--ink-dim);
+  margin:0;
+  line-height:1.45;
+}
+.card-foot{
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:500;
+  color:var(--ink-soft);
+}
+a.card:hover .card-foot{color:var(--accent);}
+.card-foot .arrow{transition:transform 0.15s ease;}
+a.card:hover .card-foot .arrow{transform:translateX(3px);}
+footer{
+  margin-top:40px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-dim);
+  letter-spacing:0.02em;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="dot"></span>
+      <span>Panel Redex</span>
+    </div>
+  </header>
+  <main>
+    <h1>Torre de Control</h1>
+    <p class="lede">Selecciona un tablero para ver cumplimiento, avance y forecast en tiempo real.</p>
+    <div class="grid" style="margin-top:28px;">
+      <a class="card" href="recepcion.html">
+        <div class="card-top">
+          <span class="card-code">01 · RECEP</span>
+          <span class="card-icon">📥</span>
+        </div>
+        <div class="card-body">
+          <h2>Recepción</h2>
+          <p>Unidades recibidas por centro: cumplimiento semanal y proyección.</p>
+        </div>
+        <div class="card-foot">Abrir tablero <span class="arrow">→</span></div>
+      </a>
+      <a class="card" href="envio-a-tienda.html">
+        <div class="card-top">
+          <span class="card-code">02 · ENVTDA</span>
+          <span class="card-icon">🚚</span>
+        </div>
+        <div class="card-body">
+          <h2>Envío a Tienda</h2>
+          <p>Unidades despachadas por país: cumplimiento semanal y proyección.</p>
+        </div>
+        <div class="card-foot">Abrir tablero <span class="arrow">→</span></div>
+      </a>
+      <a class="card" href="ecommerce.html">
+        <div class="card-top">
+          <span class="card-code">03 · E-COM</span>
+          <span class="card-icon">🛒</span>
+        </div>
+        <div class="card-body">
+          <h2>E-commerce</h2>
+          <p>Forecast Web Chile + Perú: plan, real y proyección de unidades.</p>
+        </div>
+        <div class="card-foot">Abrir tablero <span class="arrow">→</span></div>
+      </a>
+      <a class="card" href="consolidado.html">
+        <div class="card-top">
+          <span class="card-code">04 · CONSOL</span>
+          <span class="card-icon">📊</span>
+        </div>
+        <div class="card-body">
+          <h2>Consolidado</h2>
+          <p>Recepción, Envío a Tienda y E-commerce reunidos en un solo tablero.</p>
+        </div>
+        <div class="card-foot">Abrir tablero <span class="arrow">→</span></div>
+      </a>
+    </div>
+  </main>
+  <footer>
+    <span>Datos desde Power BI</span>
+    <span>Actualización manual</span>
+  </footer>
+</div>
+</body>
+</html>
