@@ -748,6 +748,12 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
     <div id="departamentoTrendAnalysis"></div>
   </div>
 
+  <div class="insight-tabs" id="devMetricTabs">
+    <span style="align-self:center;color:var(--ink-dim);font-size:12.5px;font-weight:600;margin-right:4px;">Top 5 / Cumplimiento / Insights — Desviación:</span>
+    <button class="insight-tab active" data-metric="porcentual">Ordenar por %</button>
+    <button class="insight-tab" data-metric="unidades">Ordenar por unidades</button>
+  </div>
+
   <div class="two-col">
     <div class="section">
       <div class="section-head"><div><h2>Top 5 más precisos</h2><p>Combinación departamento–sucursal con menor desviación absoluta en el período.</p></div></div>
@@ -778,7 +784,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
         <input type="text" id="searchBSucursal" placeholder="Buscar sucursal…">
         <span class="count" id="countBSucursal">48 sucursales (top 25 de 48 por desviación absoluta)</span>
       </div>
-      <div class="table-scroll"><table class="weekly" id="tableBSucursal"><thead><tr><th class="sortable" data-col="name">Sucursal</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="dev">Desviación<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
+      <div class="table-scroll"><table class="weekly" id="tableBSucursal"><thead><tr><th class="sortable" data-col="name">Sucursal</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="devUnits">Desviación</th><th class="sortable" data-col="devPct">Desviación %<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
     </div>
 
     <div class="breakdown-pane" id="paneBDepartamento">
@@ -787,7 +793,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
         <input type="text" id="searchBDepartamento" placeholder="Buscar departamento…">
         <span class="count" id="countBDepartamento">108 departamentos (top 25 de 108 por desviación absoluta)</span>
       </div>
-      <div class="table-scroll"><table class="weekly" id="tableBDepartamento"><thead><tr><th class="sortable" data-col="name">Departamento</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="dev">Desviación<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
+      <div class="table-scroll"><table class="weekly" id="tableBDepartamento"><thead><tr><th class="sortable" data-col="name">Departamento</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="devUnits">Desviación</th><th class="sortable" data-col="devPct">Desviación %<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
     </div>
 
     <div class="breakdown-pane" id="paneBCombo">
@@ -796,7 +802,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
         <input type="text" id="searchBCombo" placeholder="Buscar departamento o sucursal…">
         <span class="count" id="countBCombo">3551 combinaciones (top 25 de 3551 por desviación absoluta)</span>
       </div>
-      <div class="table-scroll"><table class="weekly" id="tableBCombo"><thead><tr><th class="sortable" data-col="departamento">Departamento</th><th class="sortable" data-col="sucursal">Sucursal</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="dev">Desviación<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
+      <div class="table-scroll"><table class="weekly" id="tableBCombo"><thead><tr><th class="sortable" data-col="departamento">Departamento</th><th class="sortable" data-col="sucursal">Sucursal</th><th class="sortable" data-col="real">Real</th><th class="sortable" data-col="plan">Plan</th><th class="sortable" data-col="devUnits">Desviación</th><th class="sortable" data-col="devPct">Desviación %<span class="arrow">▼</span></th><th>Estado</th><th>Sem. Meta</th><th>Sem. Crítico</th><th>Sem. Extremo</th></tr></thead><tbody></tbody></table></div>
     </div>
   </div>
 
@@ -805,7 +811,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
       <div>
         <h2>Insights y recomendaciones</h2>
         <p>Lectura automática de patrones a partir de los datos cargados y los filtros activos.</p>
-        <p class="insight-criteria"><strong>Por sucursal / Por departamento:</strong> top 9, ordenados por mayor % de desviación absoluta. <strong>Combinación depto–sucursal:</strong> top 12, ordenados primero por <strong>semanas en Extremo</strong> y luego por desviación — un caso con más semanas en Extremo sale antes que otro con mayor % pero menos semanas.</p>
+        <p class="insight-criteria"><strong>Por sucursal / Por departamento:</strong> top 9, ordenados por mayor desviación absoluta (unidades o %, según el toggle de arriba). <strong>Combinación depto–sucursal:</strong> top 12, ordenados primero por <strong>semanas en Extremo</strong> y luego por desviación — un caso con más semanas en Extremo sale antes que otro con mayor desviación pero menos semanas.</p>
       </div>
     </div>
     <div class="insight-tabs">
@@ -958,6 +964,13 @@ function deviation(real, plan){
 }
 function fmtInt(n){ return Math.round(n).toLocaleString('es-PE'); }
 function fmtPct(n){ return (n===null||!isFinite(n)) ? '—' : (n>=0?'+':'') + n.toFixed(1) + '%'; }
+function fmtSignedInt(n){ return (n>=0?'+':'') + fmtInt(n); }
+// Toggle global "Ver desviacion en: Porcentual / Unidades" -- afecta Top 5,
+// Cumplimiento por sucursal/departamento/combinacion e Insights. El Estado
+// (Meta/Critico/Extremo) sigue clasificandose SIEMPRE por % (deviation()),
+// el toggle solo cambia que numero se muestra/ordena.
+let devMetric = 'porcentual';
+function fmtDev(devPct, devUnits){ return `${fmtSignedInt(devUnits)} · ${fmtPct(devPct)}`; }
 
 /* ==================================================================
    DATE / WEEK HELPERS
@@ -1446,7 +1459,7 @@ function groupBy(arr, keyFn){
 function sumRealPlan(rows){
   let real=0, plan=0;
   rows.forEach(r=>{ real+=r.real; plan+=r.plan; });
-  return {real, plan, dev: deviation(real,plan)};
+  return {real, plan, dev: deviation(real,plan), devUnits: real-plan};
 }
 function groupedRealPlanBy(rows, field){
   const byField = groupBy(rows, r=>r[field]);
@@ -2576,8 +2589,9 @@ function renderTopLists(){
   const rows = filteredRecords();
   const byCombo = groupBy(rows, r => r.departamento + ' — ' + r.sucursal);
   const combos = Array.from(byCombo.entries()).map(([k,list]) => {
-    const {real,plan,dev} = sumRealPlan(list);
-    return {name:k, dev, absDev: Math.abs(dev||0), hasPlan: plan>0};
+    const {real,plan,dev,devUnits} = sumRealPlan(list);
+    const active = devMetric === 'unidades' ? devUnits : dev;
+    return {name:k, dev, devUnits, absDev: active===null ? -1 : Math.abs(active), hasPlan: plan>0};
   }).filter(c=>c.hasPlan);
   const best = combos.slice().sort((a,b)=>a.absDev-b.absDev).slice(0,5);
   const worst = combos.slice().sort((a,b)=>b.absDev-a.absDev).slice(0,5);
@@ -2587,15 +2601,15 @@ function renderTopLists(){
 function renderBarList(containerId, items){
   const el = document.getElementById(containerId);
   if(!items.length){ el.innerHTML = '<div class="empty-note">Sin datos suficientes.</div>'; return; }
-  const maxAbs = Math.max(...items.map(i=>i.absDev), 1);
+  const maxAbs = Math.max(...items.map(i=>Math.max(i.absDev,0)), 1);
   el.innerHTML = items.map(i => {
     const status = classify(i.dev);
     const color = status==='meta' ? 'var(--meta)' : status==='critico' ? 'var(--critico)' : status==='extremo' ? 'var(--extremo)' : '#b7bec9';
-    const w = i.dev===null ? 4 : Math.max(4, (i.absDev/maxAbs)*100);
+    const w = i.absDev<0 ? 4 : Math.max(4, (i.absDev/maxAbs)*100);
     return `<div class="bar-row">
       <div class="name" title="${escapeHtml(i.name)}">${escapeHtml(i.name)}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${color}"></div></div>
-      <div class="bar-val">${fmtPct(i.dev)}</div>
+      <div class="bar-val">${fmtDev(i.dev, i.devUnits)}</div>
     </div>`;
   }).join('');
 }
@@ -2605,9 +2619,9 @@ function renderBarList(containerId, items){
 ================================================================== */
 const BREAKDOWN_MODES = ['sucursal','departamento','combo'];
 const BREAKDOWN_STATE = {
-  sucursal: {sort:{col:'absDev',dir:'desc'}, search:''},
-  departamento: {sort:{col:'absDev',dir:'desc'}, search:''},
-  combo: {sort:{col:'absDev',dir:'desc'}, search:''},
+  sucursal: {sort:{col:'absDevPct',dir:'desc'}, search:''},
+  departamento: {sort:{col:'absDevPct',dir:'desc'}, search:''},
+  combo: {sort:{col:'absDevPct',dir:'desc'}, search:''},
 };
 const BREAKDOWN_ID = {sucursal:'BSucursal', departamento:'BDepartamento', combo:'BCombo'};
 const DIR_ARROW = {mejora:'↓ mejora', empeoramiento:'↑ empeora', estable:'→ estable', insuficiente:'— s/datos'};
@@ -2618,7 +2632,7 @@ function computeBreakdown(mode){
     ? groupBy(rows, r => r.departamento + '\u0001' + r.sucursal)
     : groupBy(rows, r => r[mode]);
   return Array.from(byGroup.entries()).map(([key, list]) => {
-    const {real, plan, dev} = sumRealPlan(list);
+    const {real, plan, dev, devUnits} = sumRealPlan(list);
     const wk = weeklyAgg(list);
     const counts = {meta:0,critico:0,extremo:0,na:0};
     wk.forEach(w=>counts[w.status]++);
@@ -2630,10 +2644,13 @@ function computeBreakdown(mode){
       dir = totalChange<=-2 ? 'mejora' : totalChange>=2 ? 'empeoramiento' : 'estable';
     }
     const name = mode==='combo' ? list[0].departamento + ' — ' + list[0].sucursal : list[0][mode];
+    const absDevUnits = Math.abs(devUnits);
+    const absDevPct = dev===null ? -1 : Math.abs(dev);
+    const absDev = devMetric === 'unidades' ? absDevUnits : absDevPct;
     return {
       key, name,
       departamento: list[0].departamento, sucursal: list[0].sucursal,
-      real, plan, dev, absDev: dev===null ? -1 : Math.abs(dev),
+      real, plan, dev, devUnits, absDevUnits, absDevPct, absDev,
       status: classify(dev), counts, weeks: wk.length, dir,
     };
   });
@@ -2660,13 +2677,18 @@ function renderBreakdown(mode){
   }
   const sorted = sortBreakdown(items, bstate.sort);
 
-  // chart: top 25 by absolute deviation among currently filtered/searched items
+  // chart: top 25 por la desviacion absoluta activa (toggle Unidades/%)
   const chartItems = items.slice().sort((a,b)=>b.absDev-a.absDev).slice(0,25);
   renderBarList('chart' + idSuf, chartItems);
-  const chartNote = items.length > 25 ? ` (top 25 de ${items.length} por desviación absoluta)` : '';
+  const critTxt = devMetric==='unidades' ? 'unidades' : '%';
+  const chartNote = items.length > 25 ? ` (top 25 de ${items.length} por desviación absoluta en ${critTxt})` : '';
   document.getElementById('count' + idSuf).textContent = items.length + (mode==='sucursal'?' sucursales':mode==='departamento'?' departamentos':' combinaciones') + chartNote;
 
-  // table
+  // table -- Desviacion (unidades) y Desviacion % SIEMPRE ambas visibles
+  // (igual que DASHBOARD CONSOLIDADO); el toggle de arriba solo cambia el
+  // orden inicial / la seleccion del Top 25 del grafico y del Top 5, cada
+  // columna se puede ademas ordenar de forma independiente con su propio
+  // encabezado clickeable.
   const table = document.getElementById('table' + idSuf);
   const cols = mode === 'combo'
     ? [
@@ -2677,16 +2699,19 @@ function renderBreakdown(mode){
   cols.push(
     {key:'real', label:'Real'},
     {key:'plan', label:'Plan'},
-    {key:'dev', label:'Desviación'},
+    {key:'devUnits', label:'Desviación'},
+    {key:'devPct', label:'Desviación %'},
     {key:'status', label:'Estado'},
     {key:'counts_meta', label:'Sem. Meta'},
     {key:'counts_critico', label:'Sem. Crítico'},
     {key:'counts_extremo', label:'Sem. Extremo'}
   );
+  const SORT_KEY = {devUnits:'absDevUnits', devPct:'absDevPct'};
   const sortCol = bstate.sort.col, sortDir = bstate.sort.dir;
   const theadHtml = '<thead><tr>' + cols.map(c => {
-    const sortable = ['departamento','sucursal','name','real','plan','dev'].includes(c.key) || c.key==='absDev';
-    const activeSort = (c.key===sortCol) || (c.key==='dev' && sortCol==='absDev');
+    const sortable = ['departamento','sucursal','name','real','plan','devUnits','devPct'].includes(c.key);
+    const colSortKey = SORT_KEY[c.key] || c.key;
+    const activeSort = colSortKey === sortCol;
     const arrow = activeSort ? `<span class="arrow">${sortDir==='asc'?'▲':'▼'}</span>` : '';
     return `<th${sortable?' class="sortable" data-col="'+c.key+'"':''}>${c.label}${arrow}</th>`;
   }).join('') + '</tr></thead>';
@@ -2694,6 +2719,7 @@ function renderBreakdown(mode){
     ${mode==='combo' ? `<td>${escapeHtml(i.departamento)}</td><td>${escapeHtml(i.sucursal)}</td>` : `<td>${escapeHtml(i.name)}</td>`}
     <td>${fmtInt(i.real)}</td>
     <td>${fmtInt(i.plan)}</td>
+    <td>${fmtSignedInt(i.devUnits)}</td>
     <td>${fmtPct(i.dev)}</td>
     <td><span class="badge st-${i.status}">${STATUS_LABEL[i.status]}</span></td>
     <td>${i.counts.meta}</td>
@@ -2706,12 +2732,12 @@ function renderBreakdown(mode){
   }
   table.querySelectorAll('th.sortable').forEach(th => {
     th.addEventListener('click', () => {
-      let col = th.dataset.col;
-      if(col === 'dev') col = 'absDev';
+      const raw = th.dataset.col;
+      const col = SORT_KEY[raw] || raw;
       if(bstate.sort.col === col){
         bstate.sort.dir = bstate.sort.dir === 'asc' ? 'desc' : 'asc';
       } else {
-        bstate.sort = {col, dir: col==='real'||col==='plan'||col==='absDev' ? 'desc':'asc'};
+        bstate.sort = {col, dir: ['real','plan','absDevUnits','absDevPct'].includes(col) ? 'desc':'asc'};
       }
       renderBreakdown(mode);
     });
@@ -2732,9 +2758,9 @@ BREAKDOWN_MODES.forEach(mode => {
 });
 
 
-document.querySelectorAll('.insight-tabs:not(#breakdownTabs) .insight-tab').forEach(tab => {
+document.querySelectorAll('.insight-tabs:not(#breakdownTabs):not(#devMetricTabs) .insight-tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.insight-tabs:not(#breakdownTabs) .insight-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.insight-tabs:not(#breakdownTabs):not(#devMetricTabs) .insight-tab').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.insight-pane').forEach(p=>p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('pane' + tab.dataset.pane.charAt(0).toUpperCase() + tab.dataset.pane.slice(1)).classList.add('active');
@@ -2746,6 +2772,17 @@ document.querySelectorAll('#breakdownTabs .insight-tab').forEach(tab => {
     document.querySelectorAll('.breakdown-pane').forEach(p=>p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('pane' + tab.dataset.pane).classList.add('active');
+  });
+});
+document.querySelectorAll('#devMetricTabs .insight-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    devMetric = tab.dataset.metric;
+    document.querySelectorAll('#devMetricTabs .insight-tab').forEach(t=>t.classList.toggle('active', t===tab));
+    const targetCol = devMetric === 'unidades' ? 'absDevUnits' : 'absDevPct';
+    BREAKDOWN_MODES.forEach(m => { BREAKDOWN_STATE[m].sort = {col: targetCol, dir: 'desc'}; });
+    renderTopLists();
+    renderAllBreakdowns();
+    renderInsights();
   });
 });
 
@@ -2765,10 +2802,11 @@ function buildEntityInsights(field, labelSingular){
   const rows = filteredRecords();
   const byGroup = groupBy(rows, r=>r[field]);
   const items = Array.from(byGroup.entries()).map(([name, list]) => {
-    const {real,plan,dev} = sumRealPlan(list);
+    const {real,plan,dev,devUnits} = sumRealPlan(list);
     const t = trendDirection(list);
     const extremeWeeks = t.wk.filter(w=>w.status==='extremo').length;
-    return {name, real, plan, dev, absDev:Math.abs(dev||0), dir:t.dir, totalChange:t.totalChange||0, extremeWeeks, weeks:t.wk.length};
+    const active = devMetric === 'unidades' ? devUnits : dev;
+    return {name, real, plan, dev, devUnits, absDev: active===null?-1:Math.abs(active), dir:t.dir, totalChange:t.totalChange||0, extremeWeeks, weeks:t.wk.length};
   }).filter(i => i.plan > 0);
   items.sort((a,b)=>b.absDev-a.absDev);
   return items;
@@ -2788,10 +2826,11 @@ function insightCard(item, kind){
   } else {
     rec = 'Dentro de meta — mantener parámetros actuales, monitoreo de rutina.';
   }
+  const devAbsTxt = `${fmtInt(Math.abs(item.devUnits))} und (${Math.abs(item.dev).toFixed(1)}%)`;
   return `<div class="insight-card ${toneClass}">
     <h4>${item.name}</h4>
-    <div class="meta-line">Accuracy período: ${fmtPct(item.dev)} · ${STATUS_LABEL[status]} · ${dirText}</div>
-    <p>Real ${fmtInt(item.real)} vs. Plan ${fmtInt(item.plan)} — ${sentido} en ${Math.abs(item.dev).toFixed(1)}% acumulado. ${item.extremeWeeks} de ${item.weeks} semanas cayeron en Extremo.</p>
+    <div class="meta-line">Accuracy período: ${fmtDev(item.dev, item.devUnits)} · ${STATUS_LABEL[status]} · ${dirText}</div>
+    <p>Real ${fmtInt(item.real)} vs. Plan ${fmtInt(item.plan)} — ${sentido} en ${devAbsTxt} acumulado. ${item.extremeWeeks} de ${item.weeks} semanas cayeron en Extremo.</p>
     <div class="rec">→ ${rec}</div>
   </div>`;
 }
@@ -2807,10 +2846,11 @@ function renderInsights(){
   const rows = filteredRecords();
   const byCombo = groupBy(rows, r => r.departamento + ' — ' + r.sucursal);
   const comboItems = Array.from(byCombo.entries()).map(([name,list]) => {
-    const {real,plan,dev} = sumRealPlan(list);
+    const {real,plan,dev,devUnits} = sumRealPlan(list);
     const t = trendDirection(list);
     const extremeWeeks = t.wk.filter(w=>w.status==='extremo').length;
-    return {name, real, plan, dev, absDev:Math.abs(dev||0), dir:t.dir, extremeWeeks, weeks:t.wk.length};
+    const active = devMetric === 'unidades' ? devUnits : dev;
+    return {name, real, plan, dev, devUnits, absDev: active===null?-1:Math.abs(active), dir:t.dir, extremeWeeks, weeks:t.wk.length};
   }).filter(i=>i.plan>0)
     .sort((a,b)=> (b.extremeWeeks-a.extremeWeeks) || (b.absDev-a.absDev)).slice(0,12);
   document.getElementById('gridCombo').innerHTML = comboItems.length
