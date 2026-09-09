@@ -218,7 +218,7 @@ input,select{font-family:inherit;}
 .ribbon-head .legend{display:flex;gap:14px;font-size:11px;color:var(--ink-dim);font-family:var(--mono);}
 .ribbon-head .legend span{display:inline-flex;align-items:center;gap:5px;}
 .legend .sw{width:9px;height:9px;border-radius:2px;display:inline-block;}
-.ribbon-strip{display:flex;gap:2px;height:46px;align-items:stretch;}
+.ribbon-strip{display:flex;gap:2px;height:46px;align-items:stretch;overflow-x:auto;}
 .ribbon-seg{flex:1;border-radius:3px;min-width:4px;position:relative;cursor:pointer;transition:transform .1s ease;}
 .ribbon-seg:hover{transform:scaleY(1.06);}
 .ribbon-seg.st-meta{background:var(--meta);}
@@ -341,6 +341,11 @@ svg.chart{display:block;}
 
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 @media (max-width:920px){.two-col{grid-template-columns:1fr;} .kpi-strip{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:480px){
+  .brand{flex-shrink:1;min-width:0;flex-wrap:wrap;row-gap:2px;}
+  .brand .mark{font-size:16px;}
+  .kpi-strip{grid-template-columns:1fr;}
+}
 
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .bar-row .name{width:180px;flex-shrink:0;font-size:12px;color:var(--ink-soft);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -367,7 +372,7 @@ svg.chart{display:block;}
   background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:7px 10px;border-radius:7px;font-size:12.5px;min-width:220px;
 }
 .table-toolbar .count{font-family:var(--mono);font-size:11px;color:var(--ink-dim);}
-.table-scroll{max-height:440px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;}
+.table-scroll{max-height:440px;overflow-y:auto;overflow-x:auto;border:1px solid var(--line);border-radius:8px;}
 .table-scroll table.weekly{font-size:12.3px;}
 .table-scroll thead th{position:sticky;top:0;background:var(--panel);z-index:2;}
 table.weekly th.sortable{cursor:pointer;user-select:none;}
@@ -532,6 +537,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
         <p>Real vs. Plan (Und Proc CD) por semana lunes–domingo, solo semanas ya cerradas. Clic en una semana para abrir por sucursal; clic en una sucursal para abrir por departamento.</p>
       </div>
     </div>
+    <div style="overflow-x:auto;">
     <table class="weekly">
       <thead>
         <tr>
@@ -540,6 +546,7 @@ footer.note code{font-family:var(--mono);background:var(--panel-2);padding:1px 5
       </thead>
       <tbody id="weeklyBody"></tbody>
     </table>
+    </div>
     <div class="empty-note hidden" id="weeklyEmpty">Sin semanas para los filtros actuales.</div>
   </div>
 
